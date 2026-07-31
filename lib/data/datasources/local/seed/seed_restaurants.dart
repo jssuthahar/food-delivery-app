@@ -24,7 +24,7 @@ AddressModel _addr(
 
 /// 20 seeded restaurants across the Klang Valley.
 ///
-/// `r-06` is owned by the demo restaurant-partner persona (`partner@grabbite.my`)
+/// `r-06` is owned by the demo restaurant-partner persona (`partner@msdevbuild.com`)
 /// so the partner dashboard has real orders and a real menu to manage.
 final List<RestaurantModel> kSeedRestaurants = <RestaurantModel>[
   RestaurantModel(

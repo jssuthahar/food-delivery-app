@@ -9,6 +9,10 @@
 // box while running on the local demo backend (`Backend.demo`). Running
 // `flutterfire configure` overwrites it with your real project's values.
 //
+// The Android `appId` below is real - it is the app CI ships builds to via
+// Firebase App Distribution (see .github/workflows/android-distribute.yml).
+// The API keys and project id are still placeholders.
+//
 // Nothing here is read unless `AppConfig.instance.backend == Backend.firebase`.
 
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
@@ -36,29 +40,36 @@ class DefaultFirebaseOptions {
     };
   }
 
+  /// Project number taken from the registered Android app ID. The rest of the
+  /// values still have to come from `flutterfire configure`.
+  static const String messagingSenderId = '846777623577';
+
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'REPLACE_WITH_YOUR_WEB_API_KEY',
-    appId: '1:000000000000:web:0000000000000000000000',
-    messagingSenderId: '000000000000',
-    projectId: 'grabbite-demo',
-    authDomain: 'grabbite-demo.firebaseapp.com',
-    storageBucket: 'grabbite-demo.appspot.com',
+    appId: '1:846777623577:web:0000000000000000000000',
+    messagingSenderId: messagingSenderId,
+    projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
+    authDomain: 'REPLACE_WITH_YOUR_PROJECT_ID.firebaseapp.com',
+    storageBucket: 'REPLACE_WITH_YOUR_PROJECT_ID.appspot.com',
   );
 
+  /// The real Android app, registered for CI distribution. Only [appId] and
+  /// [messagingSenderId] are known here; App Distribution needs nothing more,
+  /// but running the app against Firebase needs the API key and project id too.
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'REPLACE_WITH_YOUR_ANDROID_API_KEY',
-    appId: '1:000000000000:android:0000000000000000000000',
-    messagingSenderId: '000000000000',
-    projectId: 'grabbite-demo',
-    storageBucket: 'grabbite-demo.appspot.com',
+    appId: '1:846777623577:android:8fefdbc82283d5ec6a7688',
+    messagingSenderId: messagingSenderId,
+    projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
+    storageBucket: 'REPLACE_WITH_YOUR_PROJECT_ID.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'REPLACE_WITH_YOUR_IOS_API_KEY',
-    appId: '1:000000000000:ios:0000000000000000000000',
-    messagingSenderId: '000000000000',
-    projectId: 'grabbite-demo',
-    storageBucket: 'grabbite-demo.appspot.com',
+    appId: '1:846777623577:ios:0000000000000000000000',
+    messagingSenderId: messagingSenderId,
+    projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
+    storageBucket: 'REPLACE_WITH_YOUR_PROJECT_ID.appspot.com',
     iosBundleId: 'com.suthahar.foodDeliveryApp',
   );
 }

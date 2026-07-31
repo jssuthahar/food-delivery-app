@@ -93,7 +93,7 @@ class _PromoFieldState extends State<PromoField> {
                 textCapitalization: TextCapitalization.characters,
                 onSubmitted: (_) => _apply(),
                 decoration: const InputDecoration(
-                  hintText: 'e.g. GRABBITE30',
+                  hintText: 'e.g. MSDEV30',
                   isDense: true,
                   prefixIcon: Icon(Icons.confirmation_number_outlined, size: 20),
                 ),
@@ -111,7 +111,7 @@ class _PromoFieldState extends State<PromoField> {
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
-          'Try GRABBITE30, NEWBITE or LUNCH20.',
+          'Try MSDEV30, NEWBITE or LUNCH20.',
           style: theme.textTheme.bodySmall,
         ),
       ],

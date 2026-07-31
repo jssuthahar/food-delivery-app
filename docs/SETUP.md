@@ -12,6 +12,7 @@
 - [Seeding a Firestore project](#seeding-a-firestore-project)
 - [Building for release](#building-for-release)
 - [Troubleshooting](#troubleshooting)
+- [Shipping it](#shipping-it)
 
 ---
 
@@ -75,8 +76,10 @@ Everything tunable lives in `lib/core/config/app_config.dart`:
 | Field | Default | What it does |
 |---|---|---|
 | `backend` | `Backend.demo` | `demo` or `firebase` |
-| `appName` | `GrabBite` | Shown in title bar, splash, about dialog |
+| `appName` | `MSDevBuild Eats` | Shown in title bar, splash, about dialog |
 | `tagline` | `Everyday everything` | Splash subtitle |
+| `publisher` | `MSDevBuild` | Byline on the splash screen and about dialog |
+| `articleUrl` | `https://blog.msdevbuild.com/` | The write-up this demo accompanies; linked from login, profile and about |
 | `currencySymbol` | `RM` | Prefix on every price |
 | `simulatedLatency` | `450 ms` | Artificial delay so loading states are visible. `Duration.zero` in tests |
 | `orderStageDuration` | `8 s` | How long each delivery stage lasts in the simulation |
@@ -657,3 +660,13 @@ simulations on timers. Call `DemoDataSource.instance.pauseSimulations()` in
 **Everything looks stale after changing seed data** — the catalogue is cached in
 `SharedPreferences`. Use *Account → Reset demo data*, or uninstall the app /
 clear site data.
+
+**Pages deploy shows a white screen with 404s on every asset** — the `--base-href`
+does not match the repository name. See [DEPLOYMENT.md](DEPLOYMENT.md).
+
+---
+
+## Shipping it
+
+Publishing the web build to GitHub Pages and the APK to Firebase App
+Distribution is covered separately in **[DEPLOYMENT.md](DEPLOYMENT.md)**.

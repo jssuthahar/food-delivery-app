@@ -110,7 +110,7 @@ void main() {
       (WidgetTester tester) async {
     usePhoneViewport(tester);
 
-    await tester.pumpWidget(const GrabBiteApp());
+    await tester.pumpWidget(const MSDevBuildEatsApp());
     await frames(tester);
 
     // --- Sign in as the seeded customer -------------------------------------
@@ -156,7 +156,7 @@ void main() {
 
     // --- An unknown promo code is rejected ----------------------------------
     await tester.enterText(
-      find.widgetWithText(TextField, 'e.g. GRABBITE30'),
+      find.widgetWithText(TextField, 'e.g. MSDEV30'),
       'NOPECODE',
     );
     await scrollAndTap(
@@ -169,8 +169,8 @@ void main() {
 
     // --- A real promo code applies and shows the saving ---------------------
     await tester.enterText(
-      find.widgetWithText(TextField, 'e.g. GRABBITE30'),
-      'GRABBITE30',
+      find.widgetWithText(TextField, 'e.g. MSDEV30'),
+      'MSDEV30',
     );
     await scrollAndTap(
       tester,
@@ -179,7 +179,7 @@ void main() {
     );
 
     // Two matches: the applied-promo card and the confirmation snackbar.
-    expect(find.textContaining('GRABBITE30 applied'), findsWidgets);
+    expect(find.textContaining('MSDEV30 applied'), findsWidgets);
     expect(find.textContaining('You saved'), findsOneWidget);
 
     // --- Checkout -----------------------------------------------------------
@@ -210,7 +210,7 @@ void main() {
       (WidgetTester tester) async {
     usePhoneViewport(tester);
 
-    await tester.pumpWidget(const GrabBiteApp());
+    await tester.pumpWidget(const MSDevBuildEatsApp());
     await frames(tester);
 
     await scrollAndTap(tester, find.text('Aisyah - Customer'));
@@ -249,7 +249,7 @@ void main() {
   testWidgets('search finds a seeded dish', (WidgetTester tester) async {
     usePhoneViewport(tester);
 
-    await tester.pumpWidget(const GrabBiteApp());
+    await tester.pumpWidget(const MSDevBuildEatsApp());
     await frames(tester);
 
     await scrollAndTap(tester, find.text('Aisyah - Customer'));

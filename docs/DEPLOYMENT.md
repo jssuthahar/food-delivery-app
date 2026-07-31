@@ -1,0 +1,131 @@
+# Deployment
+
+Two pipelines ship this project, both defined under [.github/workflows/](../.github/workflows/):
+
+| Workflow | Trigger | Output |
+| --- | --- | --- |
+| [`deploy-web.yml`](../.github/workflows/deploy-web.yml) | push to `main`, or manual | GitHub Pages site |
+| [`android-distribute.yml`](../.github/workflows/android-distribute.yml) | push to `main`, or manual | Release APK to Firebase App Distribution testers |
+
+Both gate on `flutter analyze` and `flutter test` before building, so a red suite
+never reaches testers.
+
+---
+
+## 1. Web → GitHub Pages
+
+**Live URL:** https://jssuthahar.github.io/food-delivery-app/
+
+### One-time setup
+
+1. Repository **Settings → Pages**.
+2. **Build and deployment → Source**: select **GitHub Actions** (not "Deploy from a branch").
+
+That is the whole setup. No secrets, no `gh-pages` branch. The app runs on the
+seeded offline demo backend, so the published site is fully functional without
+Firebase.
+
+### How it works
+
+- `--base-href "/<repo-name>/"` is derived from `github.event.repository.name`,
+  so forks and renames keep working without editing the workflow. Getting this
+  wrong is the classic Pages failure: a white screen with 404s on every asset.
+- The app uses Flutter's default hash-based URL strategy (`/#/home`), which
+  needs no server rewrites. `404.html` is copied anyway as insurance in case
+  someone later switches to `usePathUrlStrategy()`.
+- `.nojekyll` stops Pages from running the bundle through Jekyll.
+- `--build-number ${{ github.run_number }}` makes each deploy traceable.
+
+### Deploying manually
+
+```bash
+flutter build web --release --base-href "/food-delivery-app/"
+# serve build/web with any static host
+```
+
+---
+
+## 2. Android → Firebase App Distribution
+
+**Firebase Android app ID:** `1:846777623577:android:8fefdbc82283d5ec6a7688`
+**Package name:** `com.suthahar.food_delivery_app`
+
+The app ID is committed in the workflow's `env` block and in
+[`lib/firebase_options.dart`](../lib/firebase_options.dart). It is not a secret —
+an app ID identifies an app, it does not authorise anything.
+
+### Required secret
+
+`FIREBASE_SERVICE_ACCOUNT` — the full JSON key for a service account allowed to
+publish releases.
+
+```bash
+# Google Cloud console, in the project that owns the Firebase app:
+#   IAM & Admin → Service Accounts → Create service account
+#   Role: "Firebase App Distribution Admin"
+#   Keys → Add key → JSON → download
+gh secret set FIREBASE_SERVICE_ACCOUNT < ~/Downloads/service-account.json
+```
+
+Paste the file's entire contents — the workflow writes it back out verbatim and
+points `GOOGLE_APPLICATION_CREDENTIALS` at it, then deletes it in an `always()`
+step.
+
+> The older `FIREBASE_TOKEN` / `firebase login:ci` flow is deprecated and stops
+> working on newer CLI versions. Use the service account.
+
+### Tester groups
+
+The workflow distributes to the group `testers` by default. Create it under
+**Firebase console → App Distribution → Testers & Groups**, and make sure the
+group alias matches — distributing to a group that does not exist fails the run.
+
+To send a build to a different group, use **Actions → Android distribute → Run
+workflow** and fill in the `groups` and `release_notes` inputs.
+
+### Optional: release signing
+
+Without these secrets the APK is signed with the debug keystore. App Distribution
+accepts that for internal testers, but installs will not upgrade over a
+previously release-signed install, and it is not suitable for Play.
+
+```bash
+keytool -genkey -v -keystore upload-keystore.jks \
+  -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+
+gh secret set ANDROID_KEYSTORE_BASE64 < <(base64 -i upload-keystore.jks)
+gh secret set ANDROID_KEYSTORE_PASSWORD
+gh secret set ANDROID_KEY_ALIAS          # "upload"
+gh secret set ANDROID_KEY_PASSWORD
+```
+
+CI writes these into `android/key.properties`;
+[`android/app/build.gradle.kts`](../android/app/build.gradle.kts) picks the file
+up when it exists and falls back to debug signing when it does not. Keep the
+`.jks` and `key.properties` out of git — both are in `.gitignore`.
+
+### Distributing manually
+
+```bash
+flutter build apk --release
+firebase appdistribution:distribute \
+  build/app/outputs/flutter-apk/app-release.apk \
+  --app 1:846777623577:android:8fefdbc82283d5ec6a7688 \
+  --release-notes "Manual build" \
+  --groups testers
+```
+
+---
+
+## Running the app against Firebase
+
+Distribution does not require the app to *use* Firebase — the shipped APK runs
+the offline demo backend. To point it at a real project:
+
+1. `flutterfire configure` (overwrites `lib/firebase_options.dart`, including the
+   placeholder API keys and project id).
+2. Set `backend: Backend.firebase` in
+   [`lib/core/config/app_config.dart`](../lib/core/config/app_config.dart).
+3. Deploy the rules and indexes under [firebase/](../firebase/).
+
+Full walkthrough in [SETUP.md](SETUP.md).

@@ -49,7 +49,7 @@ void main() {
     // carousel's auto-play timer.
     addTearDown(() => tester.pumpWidget(const SizedBox.shrink()));
 
-    await tester.pumpWidget(const GrabBiteApp());
+    await tester.pumpWidget(const MSDevBuildEatsApp());
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 500));
     await tester.pump(const Duration(seconds: 1));

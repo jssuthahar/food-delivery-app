@@ -1,9 +1,34 @@
-# GrabBite — Flutter Food Delivery Demo
+<p align="center">
+  <img src="assets/logo/logo-256.png" width="112" height="112" alt="MSDevBuild Eats logo">
+</p>
 
-A portfolio-quality Flutter food delivery app modelled on the Malaysian Grab
-super-app experience. It runs on **web, Android, iOS and tablet** from one
-codebase, and ships all three sides of a delivery marketplace: the **customer**
-app, the **restaurant partner** dashboard, and the **delivery rider** dashboard.
+<h1 align="center">MSDevBuild Eats</h1>
+
+<p align="center">
+  <strong>A portfolio-quality Flutter food delivery demo</strong><br>
+  Built by <a href="https://blog.msdevbuild.com/">MSDevBuild</a> for the article at
+  <a href="https://blog.msdevbuild.com/">blog.msdevbuild.com</a>
+</p>
+
+<p align="center">
+  <a href="https://jssuthahar.github.io/food-delivery-app/"><strong>▶ Live demo</strong></a> ·
+  <a href="docs/ARCHITECTURE.md">Architecture</a> ·
+  <a href="docs/SETUP.md">Setup</a> ·
+  <a href="docs/DEPLOYMENT.md">Deployment</a>
+</p>
+
+---
+
+> **This project accompanies an article.** It was built as a worked example for
+> **https://blog.msdevbuild.com/** — the write-up walks through the Clean
+> Architecture layering, the BLoC patterns and the trade-offs behind the code
+> you are reading. The app links back to it from the login screen, the profile
+> tab and the about dialog.
+
+A Flutter food delivery app modelled on the Malaysian Grab super-app experience.
+It runs on **web, Android, iOS and tablet** from one codebase, and ships all
+three sides of a delivery marketplace: the **customer** app, the **restaurant
+partner** dashboard, and the **delivery rider** dashboard.
 
 It runs with **zero configuration** — no Firebase project, no API keys, no
 network. A seeded in-memory backend with 20 restaurants, 100 dishes, ~160
@@ -28,6 +53,7 @@ Sign in with any demo persona on the login screen, or use
 - [State management](#state-management)
 - [The demo backend](#the-demo-backend)
 - [Firebase backend](#firebase-backend)
+- [Deployment](#deployment)
 - [Responsive design](#responsive-design)
 - [Testing](#testing)
 - [Screenshots](#screenshots)
@@ -86,7 +112,7 @@ login screen.
 back in as the partner — the order is sitting in the *Incoming* queue. Accept
 it, mark it ready, and the rider's dashboard picks it up.
 
-Promo codes: `GRABBITE30`, `NEWBITE`, `LUNCH20`, `SWEET10` (and `EXPIRED5` to
+Promo codes: `MSDEV30`, `NEWBITE`, `LUNCH20`, `SWEET10` (and `EXPIRED5` to
 see the rejection path).
 
 ---
@@ -294,6 +320,36 @@ gracefully instead of showing a black screen.
 Full walkthrough — Firestore collection layout, security rules, the Cloud
 Functions the app calls, and FCM setup per platform:
 **[docs/SETUP.md](docs/SETUP.md)**.
+
+---
+
+## Deployment
+
+Two GitHub Actions pipelines, both gated on `flutter analyze` and `flutter test`
+so a red suite never ships.
+
+| Workflow | Trigger | Ships to |
+|---|---|---|
+| [`deploy-web.yml`](.github/workflows/deploy-web.yml) | push to `main` | **GitHub Pages** → https://jssuthahar.github.io/food-delivery-app/ |
+| [`android-distribute.yml`](.github/workflows/android-distribute.yml) | push to `main` | **Firebase App Distribution** → tester group `testers` |
+
+**Web** needs no secrets — set *Settings → Pages → Source* to **GitHub Actions**
+and push. The base href is derived from the repository name, so forks work
+unchanged, and the app uses hash-based routing, so no server rewrites are needed.
+
+**Android** ships to Firebase app
+`1:846777623577:android:8fefdbc82283d5ec6a7688`. It needs one secret,
+`FIREBASE_SERVICE_ACCOUNT` (a service-account JSON with the *Firebase App
+Distribution Admin* role). Release signing is optional — supply
+`ANDROID_KEYSTORE_BASE64` and friends and the build is properly signed;
+omit them and it falls back to the debug keystore, which App Distribution still
+accepts for internal testers.
+
+Both are also runnable from the **Actions** tab, and the Android one takes
+release notes and a tester group as inputs.
+
+Full instructions, including how to mint each secret:
+**[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**.
 
 ---
 

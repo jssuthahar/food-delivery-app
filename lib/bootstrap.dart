@@ -47,14 +47,14 @@ Future<void> bootstrap({AppConfig? config}) async {
     FlutterError.presentError(details);
     developer.log(
       'Uncaught framework error',
-      name: 'GrabBite',
+      name: 'MSDevBuild Eats',
       error: details.exception,
       stackTrace: details.stack,
       level: 1000,
     );
   };
 
-  runApp(const GrabBiteApp());
+  runApp(const MSDevBuildEatsApp());
 }
 
 /// Starts Firebase only when the app is configured to use it.
@@ -70,7 +70,7 @@ Future<void> _initialiseFirebase() async {
       'Backend.firebase is selected but firebase_options.dart still holds '
       'placeholder values. Run `flutterfire configure`. Falling back to the '
       'demo backend.',
-      name: 'GrabBite',
+      name: 'MSDevBuild Eats',
       level: 900,
     );
     AppConfig.override(const AppConfig());
@@ -86,7 +86,7 @@ Future<void> _initialiseFirebase() async {
   } on Object catch (error, stackTrace) {
     developer.log(
       'Firebase initialisation failed - continuing on the demo backend.',
-      name: 'GrabBite',
+      name: 'MSDevBuild Eats',
       error: error,
       stackTrace: stackTrace,
       level: 1000,

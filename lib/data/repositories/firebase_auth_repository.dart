@@ -156,7 +156,7 @@ class FirebaseAuthRepository implements AuthRepository {
 
     final UserModel created = UserModel(
       id: account.uid,
-      name: account.displayName ?? 'GrabBite user',
+      name: account.displayName ?? 'MSDevBuild Eats user',
       email: account.email ?? '',
       phone: account.phoneNumber ?? '',
       role: UserRole.customer,

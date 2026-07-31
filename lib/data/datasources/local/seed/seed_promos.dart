@@ -1,11 +1,11 @@
 import '../../../models/promo_model.dart';
 
-/// Voucher codes accepted at checkout. `GRABBITE30` is the one advertised on
+/// Voucher codes accepted at checkout. `MSDEV30` is the one advertised on
 /// the home carousel.
 final List<PromoModel> kSeedPromos = <PromoModel>[
   PromoModel(
     id: 'p-01',
-    code: 'GRABBITE30',
+    code: 'MSDEV30',
     title: '30% off your order',
     subtitle: 'Up to RM 12 off. Min spend RM 25.',
     discountPercent: 30,

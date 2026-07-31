@@ -20,14 +20,14 @@ import 'router/app_router.dart';
 /// Three blocs are hoisted to the very top because more than one screen depends
 /// on them: the session, the basket and the theme. Everything else is created
 /// per-screen so its lifetime matches the route.
-class GrabBiteApp extends StatefulWidget {
-  const GrabBiteApp({super.key});
+class MSDevBuildEatsApp extends StatefulWidget {
+  const MSDevBuildEatsApp({super.key});
 
   @override
-  State<GrabBiteApp> createState() => _GrabBiteAppState();
+  State<MSDevBuildEatsApp> createState() => _MSDevBuildEatsAppState();
 }
 
-class _GrabBiteAppState extends State<GrabBiteApp> {
+class _MSDevBuildEatsAppState extends State<MSDevBuildEatsApp> {
   late final AuthBloc _authBloc;
   late final CartBloc _cartBloc;
   late final ThemeCubit _themeCubit;

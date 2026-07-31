@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// GrabBite Firestore security rules.
+// MSDevBuild Eats Firestore security rules.
 //
 // Principles:
 //  * The catalogue (restaurants, menus, promos, reviews) is world-readable so

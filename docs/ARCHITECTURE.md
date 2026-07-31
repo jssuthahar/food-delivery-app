@@ -1,6 +1,6 @@
 # Architecture
 
-How GrabBite is put together, and why.
+How MSDevBuild Eats is put together, and why.
 
 - [The dependency rule](#the-dependency-rule)
 - [Layers](#layers)
