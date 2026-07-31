@@ -19,7 +19,7 @@ val keystoreProperties = Properties().apply {
 val hasReleaseSigning = keystorePropertiesFile.exists()
 
 android {
-    namespace = "com.suthahar.food_delivery_app"
+    namespace = "com.msdvbuild.food"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -33,10 +33,11 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.suthahar.food_delivery_app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        // Must match the package name of the Firebase Android app that CI
+        // distributes to (1:846777623577:android:8fefdbc82283d5ec6a7688).
+        // Firebase rejects the upload if these differ, and a registered
+        // package name cannot be edited after the fact.
+        applicationId = "com.msdvbuild.food"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

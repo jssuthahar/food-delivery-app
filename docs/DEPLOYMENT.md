@@ -61,7 +61,7 @@ flutter build web --release --base-href "/food-delivery-app/"
 ## 2. Android → Firebase App Distribution
 
 **Firebase Android app ID:** `1:846777623577:android:8fefdbc82283d5ec6a7688`
-**Package name:** `com.suthahar.food_delivery_app`
+**Package name:** `com.msdvbuild.food` — must match the Firebase app exactly, or the upload is rejected
 
 The app ID is committed in the workflow's `env` block and in
 [`lib/firebase_options.dart`](../lib/firebase_options.dart). It is not a secret —

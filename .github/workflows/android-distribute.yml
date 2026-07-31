@@ -34,7 +34,7 @@ on:
 
 env:
   FLUTTER_VERSION: '3.35.3'
-  # Firebase Android app: MSDevBuild Eats (com.suthahar.food_delivery_app)
+  # Firebase Android app: MSDevBuild Eats (com.msdvbuild.food)
   FIREBASE_APP_ID: '1:846777623577:android:8fefdbc82283d5ec6a7688'
 
 jobs:

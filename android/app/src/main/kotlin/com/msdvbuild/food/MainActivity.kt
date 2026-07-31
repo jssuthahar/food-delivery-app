@@ -1,4 +1,4 @@
-package com.suthahar.food_delivery_app
+package com.msdvbuild.food
 
 import io.flutter.embedding.android.FlutterActivity
 
