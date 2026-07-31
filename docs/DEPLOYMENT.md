@@ -2,10 +2,14 @@
 
 Two pipelines ship this project, both defined under [.github/workflows/](../.github/workflows/):
 
-| Workflow | Trigger | Output |
-| --- | --- | --- |
-| [`deploy-web.yml`](../.github/workflows/deploy-web.yml) | push to `main`, or manual | GitHub Pages site |
-| [`android-distribute.yml`](../.github/workflows/android-distribute.yml) | push to `main`, or manual | Release APK to Firebase App Distribution testers |
+| Workflow | Trigger | Output | Published at |
+| --- | --- | --- | --- |
+| [`deploy-web.yml`](../.github/workflows/deploy-web.yml) | push to `main`, or manual | GitHub Pages site | <https://jssuthahar.github.io/food-delivery-app/> |
+| [`android-distribute.yml`](../.github/workflows/android-distribute.yml) | push to `main`, or manual | Release APK to Firebase App Distribution testers | <https://appdistribution.firebase.dev/i/00432c5aa60de58b> |
+
+The Android link is the App Distribution tester invitation — share it with
+anyone who should get builds. It is tied to the tester group, not to a single
+release, so it keeps pointing at the newest build without being reissued.
 
 Both gate on `flutter analyze` and `flutter test` before building, so a red suite
 never reaches testers.
@@ -14,7 +18,7 @@ never reaches testers.
 
 ## 1. Web → GitHub Pages
 
-**Live URL:** https://jssuthahar.github.io/food-delivery-app/
+**Live URL:** <https://jssuthahar.github.io/food-delivery-app/>
 
 ### One-time setup
 

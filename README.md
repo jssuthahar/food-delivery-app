@@ -12,6 +12,7 @@
 
 <p align="center">
   <a href="https://jssuthahar.github.io/food-delivery-app/"><strong>▶ Live demo</strong></a> ·
+  <a href="https://appdistribution.firebase.dev/i/00432c5aa60de58b"><strong>📱 Download for Android</strong></a> ·
   <a href="docs/ARCHITECTURE.md">Architecture</a> ·
   <a href="docs/SETUP.md">Setup</a> ·
   <a href="docs/DEPLOYMENT.md">Deployment</a>
@@ -41,6 +42,34 @@ flutter run -d chrome      # or any connected device
 
 Sign in with any demo persona on the login screen, or use
 `customer@msdevbuild.com` / `demo1234`.
+
+---
+
+## Try it without building
+
+| Platform | Link |
+|---|---|
+| **Web** | <https://jssuthahar.github.io/food-delivery-app/> |
+| **Android** | <https://appdistribution.firebase.dev/i/00432c5aa60de58b> |
+
+The Android build is distributed through Firebase App Distribution — open the
+link on the device, accept the tester invitation, and install from there. It is
+the same APK CI produces, running the offline demo backend, so it needs no
+account and no network beyond the download.
+
+All three personas share the password `demo1234`. Routing is hash-based, so
+once you are signed in as the matching role you can deep-link straight to a
+dashboard:
+
+| Persona | Sign in as | Deep link |
+|---|---|---|
+| Customer | `customer@msdevbuild.com` | [`/#/home`](https://jssuthahar.github.io/food-delivery-app/#/home) |
+| Restaurant partner | `partner@msdevbuild.com` | [`/#/partner`](https://jssuthahar.github.io/food-delivery-app/#/partner) |
+| Delivery rider | `rider@msdevbuild.com` | [`/#/rider`](https://jssuthahar.github.io/food-delivery-app/#/rider) |
+
+Each persona is fenced into its own section of the app, so these links redirect
+to the login screen — or to your own role's home — unless you are signed in as
+that persona.
 
 ---
 
