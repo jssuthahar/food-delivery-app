@@ -54,10 +54,27 @@ The app ID is committed in the workflow's `env` block and in
 [`lib/firebase_options.dart`](../lib/firebase_options.dart). It is not a secret —
 an app ID identifies an app, it does not authorise anything.
 
+**Firebase project:** `msdevbuild-demo`
+
 ### Required secret
 
 `FIREBASE_SERVICE_ACCOUNT` — the full JSON key for a service account allowed to
 publish releases.
+
+> **Do not reuse the Firebase Admin SDK key** (the
+> `<project>-firebase-adminsdk-*.json` the console offers on the Service
+> Accounts tab). It does not work for App Distribution anyway — the Admin SDK
+> Service Agent role covers Firestore and Storage but not `firebaseappdistro.*`,
+> so the CLI fails with:
+>
+> ```text
+> Error: Request to https://cloudresourcemanager.googleapis.com/v1/projects/<id>
+> had HTTP Error: 403, The caller does not have permission
+> ```
+>
+> Create a separate account whose only role is *Firebase App Distribution
+> Admin*. It is both the credential that works and the one with the smallest
+> blast radius if it leaks.
 
 ```bash
 # Google Cloud console, in the project that owns the Firebase app:

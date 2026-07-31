@@ -40,36 +40,43 @@ class DefaultFirebaseOptions {
     };
   }
 
-  /// Project number taken from the registered Android app ID. The rest of the
-  /// values still have to come from `flutterfire configure`.
+  /// Project number taken from the registered Android app ID.
   static const String messagingSenderId = '846777623577';
 
+  /// Firebase project that owns the app IDs below.
+  ///
+  /// Note the storage bucket: projects created from late 2024 onwards default
+  /// to `<project>.firebasestorage.app` rather than `<project>.appspot.com`.
+  /// `flutterfire configure` writes whichever one is correct - check the
+  /// Storage tab in the console if uploads 404.
+  static const String projectId = 'msdevbuild-demo';
+
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'REPLACE_WITH_YOUR_WEB_API_KEY',
+    apiKey: 'AIzaSyA_oVERDwPRgRJy-FMdYamWaanzgCp16aY',
     appId: '1:846777623577:web:0000000000000000000000',
     messagingSenderId: messagingSenderId,
-    projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
-    authDomain: 'REPLACE_WITH_YOUR_PROJECT_ID.firebaseapp.com',
-    storageBucket: 'REPLACE_WITH_YOUR_PROJECT_ID.appspot.com',
+    projectId: projectId,
+    authDomain: '$projectId.firebaseapp.com',
+    storageBucket: '$projectId.appspot.com',
   );
 
   /// The real Android app, registered for CI distribution. Only [appId] and
   /// [messagingSenderId] are known here; App Distribution needs nothing more,
   /// but running the app against Firebase needs the API key and project id too.
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'REPLACE_WITH_YOUR_ANDROID_API_KEY',
+    apiKey: 'AIzaSyADSvU2JyuylB6qZyumz88KAKPtLbFGgrI',
     appId: '1:846777623577:android:8fefdbc82283d5ec6a7688',
     messagingSenderId: messagingSenderId,
-    projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
-    storageBucket: 'REPLACE_WITH_YOUR_PROJECT_ID.appspot.com',
+    projectId: projectId,
+    storageBucket: '$projectId.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'REPLACE_WITH_YOUR_IOS_API_KEY',
     appId: '1:846777623577:ios:0000000000000000000000',
     messagingSenderId: messagingSenderId,
-    projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
-    storageBucket: 'REPLACE_WITH_YOUR_PROJECT_ID.appspot.com',
+    projectId: projectId,
+    storageBucket: '$projectId.appspot.com',
     iosBundleId: 'com.suthahar.foodDeliveryApp',
   );
 }
