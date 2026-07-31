@@ -67,11 +67,11 @@ jobs:
           # someone later switches to usePathUrlStrategy().
           cp build/web/index.html build/web/404.html
 
-      # `enablement: true` turns Pages on via the API the first time this runs,
-      # so a fresh clone or fork does not need anyone to visit Settings first.
+      # Requires Pages to already be enabled with Source = "GitHub Actions"
+      # (Settings -> Pages). `enablement: true` is not used here: creating a
+      # Pages site is a repo-admin operation and GITHUB_TOKEN cannot do it,
+      # so it fails with "Resource not accessible by integration".
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:

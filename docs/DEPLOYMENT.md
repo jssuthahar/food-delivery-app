@@ -18,25 +18,31 @@ never reaches testers.
 
 ### One-time setup
 
-Usually none. The workflow passes `enablement: true` to `actions/configure-pages`,
-which turns Pages on through the API on its first run. No secrets, no `gh-pages`
-branch. The app runs on the seeded offline demo backend, so the published site is
-fully functional without Firebase.
+**This must be done by hand once, before the first run:**
 
-If the run fails with:
+1. Repository **Settings → Pages**.
+2. **Build and deployment → Source**: select **GitHub Actions** (not "Deploy from a branch").
+
+There is no way around it in the workflow. `actions/configure-pages` accepts an
+`enablement: true` flag, but creating a Pages site is a repo-admin operation that
+`GITHUB_TOKEN` is not granted, so it fails with:
+
+```text
+HttpError: Resource not accessible by integration
+Create Pages site failed.
+```
+
+After the toggle is set, no secrets and no `gh-pages` branch are needed. The app
+runs on the seeded offline demo backend, so the published site is fully
+functional without Firebase.
+
+Two related failure messages, both meaning the same thing — Pages is not enabled
+yet:
 
 ```text
 Error: Get Pages site failed. Please verify that the repository has Pages
 enabled and configured to build using GitHub Actions
 ```
-
-then the workflow token was not allowed to self-enable it — common on org-owned
-repos, or where Pages is restricted by policy. Do it by hand:
-
-1. Repository **Settings → Pages**.
-2. **Build and deployment → Source**: select **GitHub Actions** (not "Deploy from a branch").
-
-Then re-run the workflow.
 
 ### How it works
 
