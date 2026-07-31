@@ -9,6 +9,8 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/utils/validators.dart';
 import '../../../core/widgets/app_button.dart';
+import '../../../core/widgets/app_logo.dart';
+import '../../../core/widgets/article_credit.dart';
 import '../../../core/widgets/app_text_field.dart';
 import '../../../domain/entities/user.dart';
 import '../bloc/auth_bloc.dart';
@@ -24,7 +26,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _email =
-      TextEditingController(text: 'customer@grabbite.my');
+      TextEditingController(text: 'customer@msdevbuild.com');
   final TextEditingController _password =
       TextEditingController(text: 'demo1234');
 
@@ -169,6 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             .read<AuthBloc>()
                             .add(AuthDemoSignInRequested(role)),
                       ),
+                      const SizedBox(height: AppSpacing.xxl),
+                      const ArticleCredit(),
                     ],
                   ),
                 ),
@@ -186,36 +190,9 @@ class _Brand extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Container(
-          height: 48,
-          width: 48,
-          decoration: BoxDecoration(
-            color: AppColors.primary,
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
-          alignment: Alignment.center,
-          child: const Text('🛵', style: TextStyle(fontSize: 24)),
-        ),
-        const SizedBox(width: AppSpacing.md),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              AppConfig.instance.appName,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.w800),
-            ),
-            Text(
-              AppConfig.instance.tagline,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ],
-        ),
-      ],
+    return AppLogoWordmark(
+      title: AppConfig.instance.appName,
+      subtitle: AppConfig.instance.tagline,
     );
   }
 }

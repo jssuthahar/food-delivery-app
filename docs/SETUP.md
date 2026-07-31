@@ -55,9 +55,9 @@ Sign in with a persona card on the login screen, or type credentials:
 
 | Role | Email | Password |
 |---|---|---|
-| Customer | `customer@grabbite.my` | `demo1234` |
-| Restaurant partner | `partner@grabbite.my` | `demo1234` |
-| Delivery rider | `rider@grabbite.my` | `demo1234` |
+| Customer | `customer@msdevbuild.com` | `demo1234` |
+| Restaurant partner | `partner@msdevbuild.com` | `demo1234` |
+| Delivery rider | `rider@msdevbuild.com` | `demo1234` |
 
 Verify the build:
 

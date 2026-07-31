@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/config/app_config.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
+import '../../../core/widgets/app_logo.dart';
 
 /// Branded launch screen.
 ///
@@ -58,22 +59,18 @@ class _SplashScreenState extends State<SplashScreen>
             children: <Widget>[
               ScaleTransition(
                 scale: _scale,
-                child: Container(
-                  height: 112,
-                  width: 112,
+                child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: BorderRadius.circular(112 * 0.2237),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.18),
+                        color: Colors.black.withValues(alpha: 0.22),
                         blurRadius: 32,
                         offset: const Offset(0, 12),
                       ),
                     ],
                   ),
-                  alignment: Alignment.center,
-                  child: const Text('🛵', style: TextStyle(fontSize: 52)),
+                  child: const AppLogo(size: 112),
                 ),
               ),
               const SizedBox(height: AppSpacing.xxl),
@@ -97,6 +94,14 @@ class _SplashScreenState extends State<SplashScreen>
                       AppConfig.instance.tagline,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             color: Colors.white.withValues(alpha: 0.86),
+                          ),
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    Text(
+                      AppConfig.instance.byline,
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: Colors.white.withValues(alpha: 0.72),
+                            letterSpacing: 0.4,
                           ),
                     ),
                   ],

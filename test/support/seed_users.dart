@@ -16,7 +16,7 @@ const Address testAddress = Address(
 const User testCustomer = User(
   id: 'u-test',
   name: 'Test Customer',
-  email: 'test@grabbite.my',
+  email: 'test@msdevbuild.com',
   phone: '012-000 0000',
   role: UserRole.customer,
   addresses: <Address>[testAddress],

@@ -50,7 +50,7 @@ final List<UserModel> kSeedUsers = <UserModel>[
   UserModel(
     id: 'u-customer',
     name: 'Aisyah Rahman',
-    email: 'customer@grabbite.my',
+    email: 'customer@msdevbuild.com',
     phone: '012-345 6789',
     role: UserRole.customer,
     avatarEmoji: '👩🏻',
@@ -63,7 +63,7 @@ final List<UserModel> kSeedUsers = <UserModel>[
   UserModel(
     id: 'u-partner',
     name: 'Lim Wei Jian',
-    email: 'partner@grabbite.my',
+    email: 'partner@msdevbuild.com',
     phone: '016-228 4410',
     role: UserRole.restaurantPartner,
     avatarEmoji: '👨🏻‍🍳',
@@ -76,7 +76,7 @@ final List<UserModel> kSeedUsers = <UserModel>[
   UserModel(
     id: 'u-rider',
     name: 'Muthu Selvam',
-    email: 'rider@grabbite.my',
+    email: 'rider@msdevbuild.com',
     phone: '019-770 1123',
     role: UserRole.deliveryPartner,
     avatarEmoji: '🧑🏽',

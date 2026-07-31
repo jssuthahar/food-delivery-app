@@ -124,7 +124,7 @@ void main() {
 
     await tester.enterText(
       find.byType(TextFormField).first,
-      'customer@grabbite.my',
+      'customer@msdevbuild.com',
     );
     await tester.enterText(find.byType(TextFormField).last, kDemoPassword);
     await tester.tap(find.widgetWithText(ElevatedButton, 'Sign in'));
@@ -140,7 +140,7 @@ void main() {
 
     await tester.enterText(
       find.byType(TextFormField).first,
-      'customer@grabbite.my',
+      'customer@msdevbuild.com',
     );
     await tester.enterText(find.byType(TextFormField).last, 'wrong-password');
     await tester.tap(find.widgetWithText(ElevatedButton, 'Sign in'));

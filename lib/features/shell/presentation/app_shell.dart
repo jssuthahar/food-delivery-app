@@ -8,6 +8,7 @@ import '../../../core/responsive/responsive.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/widgets/app_logo.dart';
 import '../../../core/widgets/state_views.dart';
 import '../../cart/bloc/cart_bloc.dart';
 
@@ -186,18 +187,9 @@ class _SideRail extends StatelessWidget {
       onDestinationSelected: onTap,
       labelType: NavigationRailLabelType.all,
       backgroundColor: Theme.of(context).colorScheme.surface,
-      leading: Padding(
-        padding: const EdgeInsets.symmetric(vertical: AppSpacing.xl),
-        child: Container(
-          height: 44,
-          width: 44,
-          decoration: BoxDecoration(
-            color: AppColors.primary,
-            borderRadius: BorderRadius.circular(AppRadius.md),
-          ),
-          alignment: Alignment.center,
-          child: const Text('🛵', style: TextStyle(fontSize: 22)),
-        ),
+      leading: const Padding(
+        padding: EdgeInsets.symmetric(vertical: AppSpacing.xl),
+        child: AppLogo(size: 44),
       ),
       destinations: _tabs
           .map(

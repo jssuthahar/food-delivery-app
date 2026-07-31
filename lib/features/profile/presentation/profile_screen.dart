@@ -9,6 +9,9 @@ import '../../../core/responsive/responsive.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/utils/formatters.dart';
+import '../../../core/utils/link_launcher.dart';
+import '../../../core/widgets/app_logo.dart';
+import '../../../core/widgets/article_credit.dart';
 import '../../../core/widgets/common_widgets.dart';
 import '../../../core/widgets/state_views.dart';
 import '../../../data/datasources/local/demo_data_source.dart';
@@ -96,6 +99,17 @@ class ProfileScreen extends StatelessWidget {
                   onTap: () => _resetDemoData(context),
                 ),
                 _MenuTile(
+                  icon: Icons.menu_book_outlined,
+                  title: 'Read the article',
+                  subtitle:
+                      'The ${AppConfig.instance.publisher} write-up this demo '
+                      'was built for',
+                  onTap: () => LinkLauncher.open(
+                    context,
+                    AppConfig.instance.articleUrl,
+                  ),
+                ),
+                _MenuTile(
                   icon: Icons.info_outline_rounded,
                   title: 'About this app',
                   subtitle:
@@ -103,6 +117,8 @@ class ProfileScreen extends StatelessWidget {
                       '${AppConfig.instance.backend.name} backend',
                   onTap: () => _showAbout(context),
                 ),
+                const SizedBox(height: AppSpacing.xl),
+                const ArticleCredit(),
                 const SizedBox(height: AppSpacing.xxl),
                 OutlinedButton.icon(
                   onPressed: () => _confirmSignOut(context),
@@ -158,20 +174,28 @@ class ProfileScreen extends StatelessWidget {
   }
 
   void _showAbout(BuildContext context) {
+    final AppConfig config = AppConfig.instance;
+
     showAboutDialog(
       context: context,
-      applicationName: AppConfig.instance.appName,
+      applicationName: config.appName,
       applicationVersion: '1.0.0',
+      applicationIcon: const Padding(
+        padding: EdgeInsets.only(right: AppSpacing.sm),
+        child: AppLogo(size: 44),
+      ),
       applicationLegalese:
-          'A portfolio Flutter demo. Restaurants, dishes, reviews and orders '
-          'are fictional seed data.',
+          'A portfolio Flutter demo by ${config.publisher}. Restaurants, '
+          'dishes, reviews and orders are fictional seed data.',
       children: <Widget>[
         const SizedBox(height: AppSpacing.md),
         Text(
-          'Architecture: Clean Architecture with BLoC, GoRouter and GetIt. '
-          'Backend: ${AppConfig.instance.backend.name}.',
+          'Clean Architecture with BLoC, GoRouter and GetIt. '
+          'Backend: ${config.backend.name}.',
           style: Theme.of(context).textTheme.bodySmall,
         ),
+        const SizedBox(height: AppSpacing.md),
+        const ArticleCredit(compact: true),
       ],
     );
   }

@@ -15,7 +15,7 @@ flutter run -d chrome      # or any connected device
 ```
 
 Sign in with any demo persona on the login screen, or use
-`customer@grabbite.my` / `demo1234`.
+`customer@msdevbuild.com` / `demo1234`.
 
 ---
 
@@ -78,9 +78,9 @@ login screen.
 
 | Role | Email | Lands on |
 |---|---|---|
-| Customer | `customer@grabbite.my` | Home feed, full ordering flow |
-| Restaurant partner | `partner@grabbite.my` | Merchant dashboard for *Din Tai Dumpling House* |
-| Delivery rider | `rider@grabbite.my` | Rider job queue |
+| Customer | `customer@msdevbuild.com` | Home feed, full ordering flow |
+| Restaurant partner | `partner@msdevbuild.com` | Merchant dashboard for *Din Tai Dumpling House* |
+| Delivery rider | `rider@msdevbuild.com` | Rider job queue |
 
 **Try this:** sign in as the customer, place an order, then sign out and sign
 back in as the partner — the order is sitting in the *Incoming* queue. Accept
