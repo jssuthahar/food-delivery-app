@@ -54,3 +54,22 @@ Clean Architecture, three layers, dependencies point inward only.
 - Don't touch `build/`, `.dart_tool/` or any `*.g.dart` / `*.freezed.dart`
 - Don't put demo seed data anywhere except
   `lib/data/datasources/local/seed/`
+
+## PR summary guidance
+
+When drafting a pull request description:
+
+- Follow the structure in `.github/pull_request_template.md`.
+- Write the "Changes" section as a short, grouped list of what changed and why
+  each group changed — not a file-by-file diff dump. Group by layer: domain,
+  data, feature, test.
+- Do NOT restate the obvious. "Modified `orders_cubit.dart`" tells the reviewer
+  nothing they cannot see in the diff.
+- Flag anything risky on its own line: a change to a `shared_preferences` key
+  or its value shape, a change to `firebase/*.rules`, a new dependency in
+  `pubspec.yaml`, a change to `OrderStatus` or `PricingPolicy`, a new
+  `Result<T>` failure path the UI does not render yet.
+- Leave "Why", "Risk & rollback" and "Reviewer focus" for the author. Add a
+  `[author: fill this in]` marker.
+- Never invent a reason for the change. If the intent is not clear from the
+  diff, say so instead of guessing.
